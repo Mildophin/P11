@@ -71,7 +71,7 @@ def purchasePlaces():
         message = "You can't book more than 12 places per competition."
         flash(message, 'error')
         return render_template('welcome.html', club=club, competitions=competitions)
-        # Debug bug/Booking-places-in-past-competitions
+        # Debug bug/Réservation pour des compétitions passées
     elif competitionDate < datetime.now():
         message = "You can't book places for a competition that is past."
         flash(message, 'error')
