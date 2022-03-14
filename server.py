@@ -62,7 +62,8 @@ def purchasePlaces():
     competitionDate = datetime.strptime(competition['date'],
                                                  '%Y-%m-%d %H:%M:%S')
     # Debug bug/Les clubs ne peuvent pas utiliser plus de points que ce qu'ils ont
-    if placesRequired > availablePoints:
+    # Fonctionnalité/Changement du nombre de points par place
+    if (placesRequired * 3) > availablePoints:
         message = f"You don't have enough points to book {placesRequired} places."
         flash(message, 'error')
         return render_template('welcome.html', club=club, competitions=competitions)
@@ -79,7 +80,8 @@ def purchasePlaces():
                                competitions=competitions)
     competition['numberOfPlaces'] = int(competition['numberOfPlaces']) - placesRequired
     # Debug bug/Mise a jour des points non fonctionnel
-    club['points'] = int(club['points'])-placesRequired
+    # Fonctionnalité/Changement du nombre de points par place
+    club['points'] = int(club['points'])-(placesRequired*3)
     flash('Great-booking complete!')
     return render_template('welcome.html', club=club, competitions=competitions, availablePoints=availablePoints)
 
